@@ -1,0 +1,33 @@
+# Project 1 - Recipencyclopedia
+
+## User Story
+
+```text
+AS A person who does not know what to cook
+I WANT to get a recipe by entering a main ingredient
+SO THAT I can explore new recipes and decide on what to eat
+```
+
+## Acceptance Criteria
+
+* Create a dashboard with form inputs.
+    * A greeting message with the date, time, temperature and weather icon displayed to help users make a decision on the dish to choose
+    * Favourites displayed at the bottom of the page to allow users to save their recipes using local storage
+    * When a user enters an ingredient and submits the form, the are presented with:
+        * 12 random dishes with the name and thumbnail of the dish
+
+    * When the user clicks on the thumbnail, a scrollable modal opens that displays:
+        * The name of the dish
+        * A thumbnail of the dish
+        * Ingredients for the dish
+        * Recipe for the dish
+        * Origin of the dish
+        * A button that allows the user to add recipe to favourites
+
+## Mock-Up
+
+The following image shows the web application's appearance and functionality:
+
+./assets/recipecyclopedia-main-mockup
+./assets/recipecyclopedia-modal-mockup
+

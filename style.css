@@ -1,0 +1,17 @@
+.gradient{
+        background: linear-gradient(180deg, #659dbd, #fbeec1) !important;
+}
+
+#ingredient-form input {
+ border-color: #8d8741;
+ border-style: solid;
+ border-top-left-radius: 5px;
+ border-bottom-left-radius: 5px;
+ border-width: 1px;
+}
+
+#ingredient-form button {
+    border: none;
+    background-color: #8d8741;
+    color: #ffffff;
+}

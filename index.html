@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <!--Bootstrap icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!--FA icons-->
+    <script src="https://kit.fontawesome.com/1e45122cec.js" crossorigin="anonymous"></script>
+    <!--CSS-->
+    <link rel="stylesheet" href="./style.css"/>
+
+    <title>Recipencyclopedia</title>
+  </head>
+  <body style="background-color: #fbeec1">
+    <div class="gradient">
+    <nav class="navbar navbar-dark" style="background-color: transparent" id="header">
+        <a class="navbar-brand"><i class="fa-solid fa-kitchen-set" style="color: #ffffff;"></i> Recipencyclopedia</a>
+            <form class="form-inline my-2 my-lg-0" id="location-form">
+                <input class="form-control mr-sm-2" type="text" placeholder="London" aria-label="location name">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Set my location</button>
+              </form>
+      </nav>
+    <div class="jumbotron" style="background-color: transparent" id="search-hero">
+        <h5 class="font-italic text-center" style="color: #ffffff;">What's for dinner...?</h5>
+        <form class="input-group form-inline mb-3 w-30 justify-content-center" id="ingredient-form">
+            <input type="text" class="col-sm-4 p-1" id="" placeholder="Enter an ingredient" aria-label="ingredient name">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </div>
+        </form>
+      </div>
+    </div>
+    <div class="container" style="background-color: #fbeec1" id="recipe-display">
+        <!--Recipes are dynamically shown here using JS-->
+    </div>
+    <nav class="navbar fixed-bottom d-block" style="background-color: transparent" id="footer">
+        <hr class="my-2" style="background-color: #bc986a; height: 1px">
+        <p class="text-center" style="color: #bc986a"><i class="fa-solid fa-spoon" style="color: #bc986a"></i> Favourites <i class="fa-solid fa-spoon" style="color: #bc986a"></i></p>
+        <div class="container">
+            <!--Favourite recipes are displayed here-->
+        </div>
+      </nav>
+
+    <!-- jQuery and Bootstrap Bundle (includes Popper) -->
+    <script
+    src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <!--JS file-->
+    <script src="./script.js"></script>
+  </body>
+</html>

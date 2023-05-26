@@ -71,5 +71,10 @@ $(document).ready(function() {
         $("#location-form").attr("class", "form-inline float-right m-2");
     })
 
+    //add event listener to submit to ingredients form
+    $("#ingredient-form").on("submit", function(event){
+        event.preventDefault();
+    })
+
 
 })

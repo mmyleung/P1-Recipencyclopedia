@@ -224,6 +224,9 @@ $(document).ready(function() {
         }
     }
 
-    
+    //add event listener to favourites images
+    $("#favourite-display").on("click", "img", function(event){
+        console.log("click");
+    })
 
 })

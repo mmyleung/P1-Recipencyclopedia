@@ -15,3 +15,7 @@
     background-color: #8d8741;
     color: #ffffff;
 }
+
+.card:hover .meal-img-button{
+    cursor: pointer;
+}

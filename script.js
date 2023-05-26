@@ -112,7 +112,7 @@ $(document).ready(function() {
                 //create new elements
                 var mealImg = $("<img>").attr({
                     "src": mealImgUrl,
-                    "class": "card-img-top rounded",
+                    "class": "card-img-top rounded meal-img-button",
                     "style": "border:2px solid #bc986a",
                     "alt": mealName,
                     "id": mealID

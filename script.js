@@ -26,9 +26,9 @@ $(document).ready(function() {
     function displayWeather() {
     //take location and pass it through openweathermap API
     var APIKey = "0fdfab0bcf3590a8e7a2c9aecb8d3388";
-    var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + APIKey + "&units=metric";
+    var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + APIKey + "&units=metric";
     $.ajax({
-        url: queryUrl,
+        url: weatherUrl,
         method: "GET"
     }).then(function(response){
         //take location, temperature and icon from response and store in variable
@@ -80,11 +80,11 @@ $(document).ready(function() {
         var ingredient = $("#ingredient-input").val();
         console.log(ingredient);
         //use ingredient to pass through themealDB api
-        var queryUrl = "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + ingredient;
+        var mealUrl = "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + ingredient;
 
         //api call
         $.ajax({
-            url: queryUrl,
+            url: mealUrl,
             method: "GET"
         }).then(function(response){
             if(!response.meals) {
@@ -140,6 +140,35 @@ $(document).ready(function() {
     $("#recipe-display").on("click", "img", function(event) {
         //store image id in variable
         var mealID = $(this).attr("id");
+        var recipeUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealID;
+        $.ajax({
+            url: recipeUrl,
+            method: "GET"
+        }).then(function(response){
+            console.log(response);
+            $("#recipe-modal").modal("show");
+            //store data into variables
+            var recipeName = response.meals[0].strMeal;
+            var recipeRegion = response.meals[0].strArea;
+            var recipeImgUrl = response.meals[0].strMealThumb;
+            var recipeInstructions = response.meals[0].strInstructions;
+            //loop through ingredients and measures and concat into one string
+            //add li element and set text to ingredients
+            for (let i = 1; i < 21; i++) {
+                var listEl = $("<li>").attr("class","list-group-item");
+                var recipeIngredient = response.meals[0]["strIngredient"+i];
+                var recipeMeasure = response.meals[0]["strMeasure"+i];
+                //check if stored value is not "", then add text to list element
+                if(recipeIngredient != "") {
+                    listEl.text(`${recipeMeasure} ${recipeIngredient}`);
+                    $("#ingredient-list").append(listEl);
+                }
+            }
+            //add data to modal
+            $("#recipeTitle").text(`${recipeName} - ${recipeRegion}`);
+            $("#recipeImg").attr("src", recipeImgUrl);
+            $("#recipeInstructions").text(recipeInstructions);
+        })
     })
 
 })

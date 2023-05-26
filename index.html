@@ -40,12 +40,52 @@
         </form>
       </div>
     </div>
+    <!-- Large modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+
+
+<div class="modal fade bd-example-modal-lg" id="recipe-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #bc986a;">
+        <h5 class="modal-title" id="recipeTitle" style="color:#ffffff">Recipe Title</h5>
+        <button type="button" class="close" style="color:#ffffff" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row" id="recipe-top">
+          <!--Image, Ingredients and Favourite button-->
+          <div class="col-sm-4">
+          <img class="w-100" id="recipeImg" src="https://www.themealdb.com/images/media/meals/uuuspp1511297945.jpg"/>
+          </div>  
+          <div class="col-sm-7" id="ingredients-container">
+            <h5 style="color:#8d8741">Ingredients</h5>
+            <ul class="list-group list-group-flush" id="ingredient-list"></ul>
+          </div>
+          <button class="btn col-sm-1"><i class="fa-regular fa-heart" style="color:#bc986a"></i></button>
+        </div>
+        <hr>
+        <div id="recipe-bottom">
+          <h5 style="color:#8d8741">Instructions</h5>
+          <div id="recipeInstructions"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
     <div class="container" style="background-color: #fbeec1" id="recipe-display">
         <!--Recipes are dynamically shown here using JS-->
     </div>
     <nav class="navbar sticky-bottom d-block" style="background-color: transparent" id="footer">
         <hr class="my-2" style="background-color: #bc986a; height: 1px">
-        <p class="text-center" style="color: #bc986a"><i class="fa-solid fa-spoon" style="color: #bc986a"></i> Favourites <i class="fa-solid fa-spoon" style="color: #bc986a"></i></p>
+        <p class="text-center" style="color: #bc986a"><i class="fa-solid fa-spoon" style="color: #bc986a"></i> Favourites <i class="fa-solid fa-spoon fa-flip-horizontal" style="color: #bc986a"></i></p>
         <div class="container">
             <!--Favourite recipes are displayed here-->
         </div>

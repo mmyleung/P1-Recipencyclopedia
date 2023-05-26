@@ -107,7 +107,6 @@ $(document).ready(function() {
                 //create card to append elements
                 var mealCard = $("<div>").attr({
                     "class": "card mb-4 rounded",
-                    "id": mealID,
                     "style": "background-color: transparent; border:none"
                 })
                 //create new elements
@@ -115,7 +114,8 @@ $(document).ready(function() {
                     "src": mealImgUrl,
                     "class": "card-img-top rounded",
                     "style": "border:2px solid #bc986a",
-                    "alt": mealName
+                    "alt": mealName,
+                    "id": mealID
                 })
                 var mealCardBody = $("<div>").attr({
                     "class": "card-body p-1",
@@ -127,7 +127,6 @@ $(document).ready(function() {
                 });
                 mealCardBody.append(mealNameP)
                 mealCard.append(mealImg, mealCardBody);
-                console.log(col);
                 col.append(mealCard);
                 row.append(col);
             }
@@ -137,5 +136,10 @@ $(document).ready(function() {
         
     })
 
+    //add event listener on recipe-display
+    $("#recipe-display").on("click", "img", function(event) {
+        //store image id in variable
+        var mealID = $(this).attr("id");
+    })
 
 })

@@ -22,6 +22,12 @@ $(document).ready(function() {
         location = localStorage.getItem("city");
         displayWeather()
     }
+    if(!localStorage.getItem("mealID")) {
+        return
+    } else {
+        location = localStorage.getItem("mealID");
+        displayFavourites()
+    }
     }
 
     function displayWeather() {
@@ -195,6 +201,7 @@ $(document).ready(function() {
             return;
         } else {
             storedIDs = JSON.parse(localStorage.getItem("mealID"));
+            var row = $("<div>").attr("class", "row");
             //for loop to loop through the storedIDs array
             for (let i = 0; i < storedIDs.length; i++) {
                 var getImgURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + storedIDs[i];
@@ -204,8 +211,15 @@ $(document).ready(function() {
                     method: "GET"
                 }).then(function(response){
                     console.log(response);
+                    var img = $("<img>").attr({
+                        "class": "col-sm-2 w-100",
+                        "src": response.meals[0].strMealThumb
+                    });
+                    row.append(img);
+
                 })
             }
+            $("#favourite-display").append(row);
         }
     }
 

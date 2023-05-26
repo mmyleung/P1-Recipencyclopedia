@@ -171,6 +171,10 @@ $(document).ready(function() {
         }
         
         localStorage.setItem("mealID", JSON.stringify(storedIDs));
+        $("#favourite-button").children("i").attr({
+            "class": "fa-solid fa-heart", 
+            "style": "color:#ffffff"
+        })
         displayFavourites();
     })
 
@@ -199,7 +203,14 @@ $(document).ready(function() {
 
                 })
             }
+            //add clear button to favourites
+            var clearButton = $("<button>").text("Clear").attr({
+                "class": "btn btn-sm mb-4 justify-self-center",
+                "style": "background-color:#8d8741; color: #ffffff",
+                "id": "clear-fav-button"
+            })
             $("#favourite-display").append(row);
+            $("#favourite-display").prepend(clearButton);
         }
     }
 
@@ -241,7 +252,32 @@ $(document).ready(function() {
             $(".recipe-title").text(`${recipeName} - ${recipeRegion}`).attr("id", recipeID);
             $("#recipeImg").attr("src", recipeImgUrl);
             $("#recipeInstructions").text(recipeInstructions);
+
+            //check if id of meal is included in array
+            if(!localStorage.getItem("mealID")){
+                return;
+            } else {
+                storedIDs = JSON.parse(localStorage.getItem("mealID"));
+                console.log(storedIDs.includes(recipeID));
+                if(storedIDs.includes(recipeID)){
+                    $("#favourite-button").children("i").attr({
+                        "class": "fa-solid fa-heart",
+                        "style": "color: #ffffff"
+                    })
+                } else {
+                    $("#favourite-button").children("i").attr({
+                        "class": "fa-regular fa-heart",
+                        "style": "color: #ffffff"
+                    })
+                }
+            }
         })
     }
+
+    //add event listener to clear button
+    $("#clear-fav-button").on("click", function(event){
+        localStorage.removeItem("mealID");
+        $("#favourite-display").empty();
+    })
 
 })

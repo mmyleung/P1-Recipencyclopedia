@@ -88,7 +88,7 @@ $(document).ready(function() {
             method: "GET"
         }).then(function(response){
             if(!response.meals) {
-                $("#search-hero").append($("<div>").text("No results found - please try again with another ingredient!")
+                $("#recipe-display").append($("<div>").text("No results found - please try again with another ingredient!")
                 .attr({
                     "style": "color: #8d8741",
                     "class": "text-center"
@@ -114,6 +114,7 @@ $(document).ready(function() {
                 var mealImg = $("<img>").attr({
                     "src": mealImgUrl,
                     "class": "card-img-top rounded",
+                    "style": "border:2px solid #bc986a",
                     "alt": mealName
                 })
                 var mealCardBody = $("<div>").attr({

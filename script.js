@@ -1,7 +1,8 @@
 $(document).ready(function() {
     var location;
+    var storedIDs = [];
     checkStorage();
-    
+
     //target form for location submission and set an event listener for submit
     $("#location-form").on("submit", function(event) {
         event.preventDefault(); 
@@ -149,6 +150,7 @@ $(document).ready(function() {
             $("#recipe-modal").modal("show");
             //store data into variables
             var recipeName = response.meals[0].strMeal;
+            var recipeID = response.meals[0].idMeal;
             var recipeRegion = response.meals[0].strArea;
             var recipeImgUrl = response.meals[0].strMealThumb;
             var recipeInstructions = response.meals[0].strInstructions;
@@ -165,10 +167,46 @@ $(document).ready(function() {
                 }
             }
             //add data to modal
-            $("#recipeTitle").text(`${recipeName} - ${recipeRegion}`);
+            $(".recipe-title").text(`${recipeName} - ${recipeRegion}`).attr("id", recipeID);
             $("#recipeImg").attr("src", recipeImgUrl);
             $("#recipeInstructions").text(recipeInstructions);
         })
     })
+
+    //add event listener to favourite button
+    $("#favourite-button").on("click", function(event){
+        console.log("hearts");
+        //store id of recipe
+        var ID = $(this).next().attr("id");
+        if(!localStorage.getItem("mealID")){
+            storedIDs.push(ID);
+        } else {
+            storedIDs = JSON.parse(localStorage.getItem("mealID"));
+            storedIDs.push(ID)
+        }
+        
+        localStorage.setItem("mealID", JSON.stringify(storedIDs));
+        displayFavourites();
+    })
+
+    //add function that displays the favourite meals at the footer
+    function displayFavourites() {
+        if(!localStorage.getItem("mealID")){
+            return;
+        } else {
+            storedIDs = JSON.parse(localStorage.getItem("mealID"));
+            //for loop to loop through the storedIDs array
+            for (let i = 0; i < storedIDs.length; i++) {
+                var getImgURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + storedIDs[i];
+                //ajax call
+                $.ajax({
+                    url: getImgURL,
+                    method: "GET"
+                }).then(function(response){
+                    console.log(response);
+                })
+            }
+        }
+    }
 
 })

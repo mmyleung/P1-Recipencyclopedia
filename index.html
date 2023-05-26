@@ -48,15 +48,15 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header" style="background-color: #bc986a;">
-        <button class="btn pb-2"><i class="fa-regular fa-heart" style="color:#ffffff"></i></button>
-        <h5 class="modal-title align-self-center" id="recipeTitle" style="color:#ffffff">Recipe Title</h5>
+        <button class="btn pb-2" id="favourite-button"><i class="fa-regular fa-heart" style="color:#ffffff"></i></button>
+        <h5 class="modal-title align-self-center recipe-title" style="color:#ffffff">Recipe Title</h5>
         <button type="button" class="close" style="color:#ffffff" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="row" id="recipe-top">
-          <!--Image, Ingredients and Favourite button-->
+          <!--Image and Ingredients-->
           <div class="col-sm-6">
           <img class="w-100" id="recipeImg" src="https://www.themealdb.com/images/media/meals/uuuspp1511297945.jpg"/>
           </div>  
@@ -68,6 +68,7 @@
         <hr>
         <div id="recipe-bottom">
           <h5 style="color:#8d8741">Instructions</h5>
+          <!--Instructions-->
           <div id="recipeInstructions"></div>
         </div>
       </div>

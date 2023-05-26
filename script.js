@@ -74,6 +74,57 @@ $(document).ready(function() {
     //add event listener to submit to ingredients form
     $("#ingredient-form").on("submit", function(event){
         event.preventDefault();
+        //empty recipe-display
+        $("#recipe-display").empty();
+        //store ingredient input into variable
+        var ingredient = $("#ingredient-input").val();
+        console.log(ingredient);
+        //use ingredient to pass through themealDB api
+        var queryUrl = "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + ingredient;
+
+        //api call
+        $.ajax({
+            url: queryUrl,
+            method: "GET"
+        }).then(function(response){
+            console.log(response);
+            //use for loop to display the data
+            var row = $("<div>").attr("class", "row");
+            for (let i = 0; i < response.meals.length; i++) {
+                console.log(i);
+                //store data into variables
+                var mealName = response.meals[i].strMeal;
+                var mealImgUrl = response.meals[i].strMealThumb;
+                var mealID = response.meals[i].idMeal;
+                //create grid to display mealcards
+                // row = $("<div>").attr("class", "row")
+                // //create row on array numbers divisible by three
+                // if(i % 3 === 0) {
+                //     row = $("<div>").attr("class", "row");
+                // }
+                //create columns
+                var col = $("<div>").attr("class", "col-sm-4");
+                //create card to append elements
+                var mealCard = $("<div>").attr({
+                    "class": "card mb-4",
+                    "id": mealID
+                })
+                //create new elements
+                var mealImg = $("<img>").attr({
+                    "src": mealImgUrl,
+                    "class": "card-img-top",
+                    "alt": mealName
+                })
+                var mealCardBody = $("<div>").attr("class", "card-body");
+                var mealNameP = $("<p>").text(mealName).attr("class", "card-text");
+                mealCardBody.append(mealNameP)
+                mealCard.append(mealImg, mealCardBody);
+                console.log(col);
+                col.append(mealCard);
+                row.append(col);
+            }
+            $("#recipe-display").append(row);
+        })
     })
 
 

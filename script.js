@@ -20,6 +20,15 @@ $("#location-form").on("submit", function(event) {
         var iconCode = response.weather[0].icon;
         console.log(city,temperature,iconCode)
         var iconImg = $("<img>").attr("src", `https://openweathermap.org/img/wn/${iconCode}.png`)
+        //add reset button 
+        var resetBtn = $("<button>").attr("class", "btn p-0 pr-1");
+        //add reset icon
+        var resetIcon = $("<i>").attr({
+            "class": "fa-solid fa-rotate-right",
+            "style": "color: #ffffff"
+        
+        });
+        resetBtn.append(resetIcon);
         //set form display to none
         $("#location-form").attr("class", "form-inline float-right m-2 d-none");
         //add new div in nav bar
@@ -27,7 +36,8 @@ $("#location-form").on("submit", function(event) {
         weatherDisplay.css("color", "#ffffff");
         //display location name, temperature and icon
         weatherDisplay.text(`${location}, ${temperature}°C`);
-        weatherDisplay.append(iconImg);
+        weatherDisplay.append(iconImg, resetBtn);
         $("#header").append(weatherDisplay);
+
     })
 })

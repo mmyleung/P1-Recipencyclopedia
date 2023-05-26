@@ -19,3 +19,7 @@
 .card:hover .meal-img-button{
     cursor: pointer;
 }
+
+nav:hover .favourite-img {
+    cursor: pointer;
+}

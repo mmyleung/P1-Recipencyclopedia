@@ -25,10 +25,11 @@ $(document).ready(function() {
     if(!localStorage.getItem("mealID")) {
         return
     } else {
-        location = localStorage.getItem("mealID");
+        storedIDs = localStorage.getItem("mealID");
         displayFavourites()
     }
     }
+    
 
     function displayWeather() {
     //take location and pass it through openweathermap API
@@ -212,7 +213,7 @@ $(document).ready(function() {
                 }).then(function(response){
                     console.log(response);
                     var img = $("<img>").attr({
-                        "class": "col-sm-2 w-100",
+                        "class": "col-sm-2 w-100 favourite-img",
                         "src": response.meals[0].strMealThumb
                     });
                     row.append(img);
@@ -222,5 +223,7 @@ $(document).ready(function() {
             $("#favourite-display").append(row);
         }
     }
+
+    
 
 })

@@ -42,12 +42,13 @@ $(document).ready(function() {
     }).then(function(response){
         //take location, temperature and icon from response and store in variable
         var city = response.name;
+        var country = response.sys.country;
         //store location in local storage so it can be displayed on load
         localStorage.setItem("city", response.name);
         var temperature = response.main.temp;
         temperature = temperature.toFixed(0);
         var iconCode = response.weather[0].icon;
-        console.log(city,temperature,iconCode)
+        console.log(response);
         var iconImg = $("<img>").attr("src", `https://openweathermap.org/img/wn/${iconCode}.png`)
         //add reset button 
         var resetBtn = $("<button>").attr({
@@ -67,7 +68,7 @@ $(document).ready(function() {
         var weatherDisplay = $("<div>").attr("class", "float-right");
         weatherDisplay.css("color", "#ffffff");
         //display location name, temperature and icon
-        weatherDisplay.text(`${location}, ${temperature}°C`);
+        weatherDisplay.text(`${city} - ${country}, ${temperature}°C`);
         weatherDisplay.append(iconImg, resetBtn);
         $("#header").append(weatherDisplay);
 
@@ -214,7 +215,6 @@ $(document).ready(function() {
             url: recipeUrl,
             method: "GET"
         }).then(function(response){
-            console.log(response);
             $("#recipe-modal").modal("show");
             //store data into variables
             var recipeName = response.meals[0].strMeal;

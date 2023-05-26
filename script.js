@@ -39,7 +39,11 @@ $(document).ready(function() {
     $.ajax({
         url: weatherUrl,
         method: "GET"
-    }).then(function(response){
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("404");
+        alert("Please check your spelling!");
+    })
+     .then(function(response){
         //take location, temperature and icon from response and store in variable
         var city = response.name;
         var country = response.sys.country;
@@ -186,7 +190,6 @@ $(document).ready(function() {
                     url: getImgURL,
                     method: "GET"
                 }).then(function(response){
-                    console.log(response);
                     var img = $("<img>").attr({
                         "class": "col-sm-2 w-100 favourite-img",
                         "src": response.meals[0].strMealThumb,

@@ -2,6 +2,7 @@ $(document).ready(function() {
     var location;
     var storedIDs = [];
     checkStorage();
+    var mealID;
 
     //target form for location submission and set an event listener for submit
     $("#location-form").on("submit", function(event) {
@@ -147,7 +148,67 @@ $(document).ready(function() {
     //add event listener on recipe-display
     $("#recipe-display").on("click", "img", function(event) {
         //store image id in variable
-        var mealID = $(this).attr("id");
+        mealID = $(this).attr("id");
+        displayModal();
+
+    })
+
+    //add event listener to favourite button
+    $("#favourite-button").on("click", function(event){
+        console.log("hearts");
+        //store id of recipe
+        var ID = $(this).next().attr("id");
+        if(!localStorage.getItem("mealID")){
+            storedIDs.push(ID);
+        } else {
+            storedIDs = JSON.parse(localStorage.getItem("mealID"));
+            storedIDs.push(ID)
+        }
+        
+        localStorage.setItem("mealID", JSON.stringify(storedIDs));
+        displayFavourites();
+    })
+
+    //add function that displays the favourite meals at the footer
+    function displayFavourites() {
+        if(!localStorage.getItem("mealID")){
+            return;
+        } else {
+            $("#favourite-display").empty();
+            storedIDs = JSON.parse(localStorage.getItem("mealID"));
+            var row = $("<div>").attr("class", "row");
+            //for loop to loop through the storedIDs array
+            for (let i = 0; i < storedIDs.length; i++) {
+                var getImgURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + storedIDs[i];
+                //ajax call
+                $.ajax({
+                    url: getImgURL,
+                    method: "GET"
+                }).then(function(response){
+                    console.log(response);
+                    var img = $("<img>").attr({
+                        "class": "col-sm-2 w-100 favourite-img",
+                        "src": response.meals[0].strMealThumb,
+                        "id": response.meals[0].idMeal
+                    });
+                    row.append(img);
+
+                })
+            }
+            $("#favourite-display").append(row);
+        }
+    }
+
+    //add event listener to favourites images
+    $("#favourite-display").on("click", "img", function(event){
+        console.log("click");
+        mealID = $(this).attr("id");
+        console.log(mealID);
+        displayModal();
+    })
+
+    //function to display recipe on modal
+    function displayModal() {
         var recipeUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealID;
         $.ajax({
             url: recipeUrl,
@@ -178,55 +239,6 @@ $(document).ready(function() {
             $("#recipeImg").attr("src", recipeImgUrl);
             $("#recipeInstructions").text(recipeInstructions);
         })
-    })
-
-    //add event listener to favourite button
-    $("#favourite-button").on("click", function(event){
-        console.log("hearts");
-        //store id of recipe
-        var ID = $(this).next().attr("id");
-        if(!localStorage.getItem("mealID")){
-            storedIDs.push(ID);
-        } else {
-            storedIDs = JSON.parse(localStorage.getItem("mealID"));
-            storedIDs.push(ID)
-        }
-        
-        localStorage.setItem("mealID", JSON.stringify(storedIDs));
-        displayFavourites();
-    })
-
-    //add function that displays the favourite meals at the footer
-    function displayFavourites() {
-        if(!localStorage.getItem("mealID")){
-            return;
-        } else {
-            storedIDs = JSON.parse(localStorage.getItem("mealID"));
-            var row = $("<div>").attr("class", "row");
-            //for loop to loop through the storedIDs array
-            for (let i = 0; i < storedIDs.length; i++) {
-                var getImgURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + storedIDs[i];
-                //ajax call
-                $.ajax({
-                    url: getImgURL,
-                    method: "GET"
-                }).then(function(response){
-                    console.log(response);
-                    var img = $("<img>").attr({
-                        "class": "col-sm-2 w-100 favourite-img",
-                        "src": response.meals[0].strMealThumb
-                    });
-                    row.append(img);
-
-                })
-            }
-            $("#favourite-display").append(row);
-        }
     }
-
-    //add event listener to favourites images
-    $("#favourite-display").on("click", "img", function(event){
-        console.log("click");
-    })
 
 })

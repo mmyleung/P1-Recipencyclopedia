@@ -167,8 +167,13 @@ $(document).ready(function() {
         if(!localStorage.getItem("mealID")){
             storedIDs.push(ID);
         } else {
-            storedIDs = JSON.parse(localStorage.getItem("mealID"));
-            storedIDs.push(ID)
+            if(storedIDs.includes(ID)){
+                return;
+            } else {
+                storedIDs = JSON.parse(localStorage.getItem("mealID"));
+                storedIDs.push(ID)
+            }
+
         }
         
         localStorage.setItem("mealID", JSON.stringify(storedIDs));

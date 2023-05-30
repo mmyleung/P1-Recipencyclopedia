@@ -53,7 +53,6 @@ $(document).ready(function() {
         var temperature = response.main.temp;
         temperature = temperature.toFixed(0);
         var iconCode = response.weather[0].icon;
-        console.log(response);
         var iconImg = $("<img>").attr("src", `https://openweathermap.org/img/wn/${iconCode}.png`)
         //add reset button 
         var resetBtn = $("<button>").attr({
@@ -93,7 +92,6 @@ $(document).ready(function() {
         $("#recipe-display").empty();
         //store ingredient input into variable
         var ingredient = $("#ingredient-input").val();
-        console.log(ingredient);
         //use ingredient to pass through themealDB api
         var mealUrl = "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + ingredient;
 
@@ -109,7 +107,6 @@ $(document).ready(function() {
                     "class": "text-center"
             }))
             } else {
-            console.log(response);
             //use for loop to display the data
             var row = $("<div>").attr("class", "row");
             for (let i = 0; i < response.meals.length; i++) {
@@ -161,17 +158,29 @@ $(document).ready(function() {
 
     //add event listener to favourite button
     $("#favourite-button").on("click", function(event){
-        console.log("hearts");
         //store id of recipe
         var ID = $(this).next().attr("id");
         if(!localStorage.getItem("mealID")){
             storedIDs.push(ID);
+            $("#favourite-button").children("i").attr({
+                class: "fa-solid fa-heart",
+                style: "color:#ffffff"
+            });
         } else {
             if(storedIDs.includes(ID)){
-                return;
+                var index = storedIDs.indexOf(ID);
+                storedIDs.splice(index, 1);
+                $("#favourite-button").children("i").attr({
+                    class: "fa-regular fa-heart",
+                    style: "color:#ffffff"
+                });
             } else {
                 storedIDs = JSON.parse(localStorage.getItem("mealID"));
-                storedIDs.push(ID)
+                storedIDs.push(ID);
+                $("#favourite-button").children("i").attr({
+                    class: "fa-solid fa-heart",
+                    style: "color:#ffffff"
+                });
             }
 
         }

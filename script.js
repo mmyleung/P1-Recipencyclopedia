@@ -160,7 +160,9 @@ $(document).ready(function() {
     $("#favourite-button").on("click", function(event){
         //store id of recipe
         var ID = $(this).next().attr("id");
+        console.log(!localStorage.getItem("mealID"))
         if(!localStorage.getItem("mealID")){
+            storedIDs = [];
             storedIDs.push(ID);
             $("#favourite-button").children("i").attr({
                 class: "fa-solid fa-heart",
@@ -259,7 +261,12 @@ $(document).ready(function() {
 
             //check if already in favourites array
             storedIDs = JSON.parse(localStorage.getItem("mealID"));
-            if(storedIDs.includes(recipeID)){
+            if(!storedIDs){
+                $("#favourite-button").children("i").attr({
+                    class: "fa-regular fa-heart",
+                    style: "color:#ffffff"
+                })
+            } else if(storedIDs.includes(recipeID)){
                 $("#favourite-button").children("i").attr({
                     class: "fa-solid fa-heart",
                     style: "color:#ffffff"

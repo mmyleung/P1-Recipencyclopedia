@@ -247,6 +247,21 @@ $(document).ready(function() {
             $(".recipe-title").text(`${recipeName} - ${recipeRegion}`).attr("id", recipeID);
             $("#recipeImg").attr("src", recipeImgUrl);
             $("#recipeInstructions").text(recipeInstructions);
+
+            //check if already in favourites array
+            storedIDs = JSON.parse(localStorage.getItem("mealID"));
+            if(storedIDs.includes(recipeID)){
+                $("#favourite-button").children("i").attr({
+                    class: "fa-solid fa-heart",
+                    style: "color:#ffffff"
+                })
+            } else {
+                $("#favourite-button").children("i").attr({
+                    class: "fa-regular fa-heart",
+                    style: "color:#ffffff"
+                })
+            }
+
         })
     }
 

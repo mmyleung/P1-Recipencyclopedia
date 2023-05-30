@@ -77,10 +77,6 @@ The greeting message is dynamic and will display breakfast, lunch or dinner depe
 
 </br>
 
-<img src="./assets/img/readme-05-weather-time-API.JPG" alt="current time and weather API" style="width: 630px">
-
-</br>
-
 ### Responsive and interactive UI
 
 I have used [Bootstrap](https://getbootstrap.com/) in this project to provide responsive UI according to screen width. I have also used modals to display my recipe cards for a more interactive UI.

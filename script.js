@@ -3,6 +3,7 @@ $(document).ready(function() {
     var storedIDs = [];
     checkStorage();
     var mealID;
+    findMealTime();
 
     //target form for location submission and set an event listener for submit
     $("#location-form").on("submit", function(event) {
@@ -242,6 +243,20 @@ $(document).ready(function() {
             $("#recipeImg").attr("src", recipeImgUrl);
             $("#recipeInstructions").text(recipeInstructions);
         })
+    }
+
+    function findMealTime() {
+        var mealTimeDisplay = $("#meal-time");
+        var lunchTime = moment('12:00pm','h:mma');
+        var dinnerTime = moment('6:00pm','h:mma');
+        var now = moment();
+        if(now.isBefore(lunchTime)){
+            mealTimeDisplay.text("breakfast")
+        } else if (now.isAfter(dinnerTime)){
+            mealTimeDisplay.text("dinner")
+        } else {
+            mealTimeDisplay.text("lunch")
+        }
     }
 
 })
